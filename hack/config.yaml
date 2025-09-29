@@ -3,7 +3,7 @@
 gfcli:
   gen:
     dao:
-    - link: "mysql:root:@tcp(127.0.0.1:3306)/Crud?sslmode=disable"
+    - link: "psql:postgres:@tcp(127.0.0.1:5432)/Crud?sslmode=disable"
       descriptionTag: true
 
   docker:

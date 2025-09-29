@@ -3,15 +3,14 @@ package cmd
 import (
 	"Crud/internal/model/entity"
 
-	"gorm.io/driver/mysql"
+	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
 func Migrate() *gorm.DB {
-	// DSN correcto para MySQL
-	dsn := "root:@tcp(127.0.0.1:3306)/Crud?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "host=localhost user=fabrica password=fabrica2024* dbname=Crud port=5432 sslmode=disable TimeZone=UTC"
 
-	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic(err)
 	}

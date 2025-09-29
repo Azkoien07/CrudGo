@@ -14,10 +14,9 @@ func main() {
 
 	// Migraciones
 	db := cmd.Migrate()
-	_ = db
 
 	// Seeders
-	cmd.RunAllSeeders(ctx)
+	cmd.RunAllSeeders(ctx, db)
 
 	// Servidor
 	cmd.Main.Run(ctx)
