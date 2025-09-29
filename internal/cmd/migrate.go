@@ -3,26 +3,28 @@ package cmd
 import (
 	"Crud/internal/model/entity"
 
-	"gorm.io/driver/postgres"
+	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
 func Migrate() *gorm.DB {
-	dsn := "host=localhost user=postgres password=Azkoien1033702995 dbname=Crud port=5432 sslmode=disable"
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	// DSN correcto para MySQL
+	dsn := "root:@tcp(127.0.0.1:3306)/Crud?charset=utf8mb4&parseTime=True&loc=Local"
+
+	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic(err)
 	}
 
-	// List of entities to migrate
+	// Lista de entidades a migrar
 	entities := []interface{}{
 		&entity.Department{},
 		&entity.Employee{},
 	}
 
-	// AutoMigrate the entities
 	if err := db.AutoMigrate(entities...); err != nil {
 		panic(err)
 	}
+
 	return db
 }

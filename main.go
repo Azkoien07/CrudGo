@@ -9,7 +9,16 @@ import (
 )
 
 func main() {
+	// Contexto global
+	ctx := gctx.New()
+
+	// Migraciones
 	db := cmd.Migrate()
 	_ = db
-	cmd.Main.Run(gctx.GetInitCtx())
+
+	// Seeders
+	cmd.RunAllSeeders(ctx)
+
+	// Servidor
+	cmd.Main.Run(ctx)
 }
